@@ -1,0 +1,78 @@
+@charset "UTF-8";
+@import "var";
+
+
+
+/*** base ***/
+html{
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body{
+  font-family: "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, Arial, sans-serif;
+	font-size: $font;
+	background: $back-color;
+	line-height: 1.6;
+	color: $main-text;
+	margin: 0;
+  min-width: 320px;
+}
+.android, .iOS{
+  background: #f1f1f1;
+}
+h1{font-size: 2em; margin: 10em 0 2em; line-height: 1.2}
+h2{font-size: 1.5em; margin: 1em 0 0.75em; line-height: 1.3}
+h3, h4{margin: 2em 0 0.75em; line-height: 1.4}
+h3{font-size: 1em}
+h4{font-size: 1em}
+p{margin: 1em 0 1.6em}
+a{color: $main-text; background: transparent}
+
+
+.wrapper {
+  width: 760px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header {
+  width: 720px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.header h1 {
+  width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.sidebar {
+  width: 180px;
+  float: left;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  min-height: 200px;
+}
+
+.main-content {
+  width: 500px;
+  float: right;
+  margin: 2px;
+  padding: 0;
+}
+
+.content-item {
+  width: 100%;
+  margin: 4px;
+  background-color: #fff;
+}
+
+.content-item h2 {
+  margin: 4px;
+}
+
+.content-item p {
+  margin: 4px;
+}
