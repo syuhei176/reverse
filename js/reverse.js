@@ -13,19 +13,6 @@
 	function ReverseMap(dataStore) {
 		var self = this;
 		this.dataStore = dataStore;
-		this.map = new Map();
-		this.map.init();
-		this.data = [];
-		this.current_color = ReverseMap.WHITE;
-		for(var i=0;i < 8*8;i++) this.data[i] = ReverseMap.EMPTY;
-		this.map.click = function(x, y) {
-			if(self.my_color == self.current_color)
-				self.dataStore.set(x + "-" + y, {color : self.current_color});
-		}
-		this.dataStore.on("set", function(e) {
-			var pos = e.id.split('-');
-			self.put(Number(pos[0]), Number(pos[1]), e.value.color);
-		});
 	}
 
 	ReverseMap.BLOCK = 0;
@@ -48,7 +35,20 @@
 	}
 
 	ReverseMap.prototype.init = function(my_color) {
-		this.my_color = my_color;
+		var self = this;
+		this.map = new Map();
+		this.map.init();
+		this.data = [];
+		this.current_color = ReverseMap.WHITE;
+		for(var i=0;i < 8*8;i++) this.data[i] = ReverseMap.EMPTY;
+		this.map.click = function(x, y) {
+			if(self.my_color == self.current_color)
+				self.dataStore.set(x + "-" + y, {color : self.current_color});
+		}
+		this.dataStore.on("set", function(e) {
+			var pos = e.id.split('-');
+			self.put(Number(pos[0]), Number(pos[1]), e.value.color);
+		});		this.my_color = my_color;
 		if(this.my_color == ReverseMap.WHITE) setText("my-color", "あなたは白です。");
 		else if(this.my_color == ReverseMap.BLACK) setText("my-color", "あなたは黒です。");
 		this.change_color(3, 3, ReverseMap.BLACK);
@@ -127,7 +127,6 @@
 	}
 
 	Map.prototype.put = function(x, y, color) {
-					console.log(x, y, color);
 		var elem = s.circle(25, 25, 25);
 		elem.attr({
 		    fill: color==ReverseMap.WHITE ? "#fff" : "#000",
