@@ -6,8 +6,8 @@
 	
 	window.ReverseMap = ReverseMap;
 
-	function setText(text) {
-		$("#turn").html(text);
+	function setText(id, text) {
+		$("#" + id).html(text);
 	}
 
 	function ReverseMap(dataStore) {
@@ -19,7 +19,8 @@
 		this.current_color = ReverseMap.WHITE;
 		for(var i=0;i < 8*8;i++) this.data[i] = ReverseMap.EMPTY;
 		this.map.click = function(x, y) {
-			self.dataStore.set(x + "-" + y, {color : self.current_color});
+			if(self.my_color == self.current_color)
+				self.dataStore.set(x + "-" + y, {color : self.current_color});
 		}
 		this.dataStore.on("set", function(e) {
 			var pos = e.id.split('-');
@@ -39,14 +40,17 @@
 	ReverseMap.prototype.turn = function() {
 		if(this.current_color == ReverseMap.WHITE) {
 			this.current_color = ReverseMap.BLACK;
-			setText("黒の番");
+			setText("turn", "黒の番");
 		}else if(this.current_color == ReverseMap.BLACK) {
 			this.current_color = ReverseMap.WHITE;
-			setText("白の番");
+			setText("turn", "白の番");
 		}
 	}
 
-	ReverseMap.prototype.init = function() {
+	ReverseMap.prototype.init = function(my_color) {
+		this.my_color = my_color;
+		if(this.my_color == ReverseMap.WHITE) setText("my-color", "あなたは白です。");
+		else if(this.my_color == ReverseMap.BLACK) setText("my-color", "あなたは黒です。");
 		this.change_color(3, 3, ReverseMap.BLACK);
 		this.change_color(3, 4, ReverseMap.WHITE);
 		this.change_color(4, 3, ReverseMap.WHITE);
