@@ -42,8 +42,8 @@ gulp.task('watch',function(){
 
 
 gulp.task('compile',function(){
-    gulp.src(['template-html/**/*.html','src/**/*.hx'], {read : false})
-    .pipe(run("haxe build.hxml").exec());
+    gulp.src(['html/**/*.html'], {read : true})
+    .pipe(gulp.dest('exports'));
 
     gulp.src(['js/**/*.js'], {read : true})
     .pipe(uglify())
